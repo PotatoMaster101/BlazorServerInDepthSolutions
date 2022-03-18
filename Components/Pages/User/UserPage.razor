@@ -1,0 +1,24 @@
+﻿@page "/User"
+
+@using Components.Data
+
+<PageTitle>Users</PageTitle>
+<h1>User</h1>
+
+@foreach (var user in _users)
+{
+    <UserComponent UserDisplay="user" OnNameClick="NameChanged"/>
+}
+
+@code {
+    private readonly User[] _users = {
+        new("John", "Smith"),
+        new("John", "Brown"),
+        new("John", "Williams")
+    };
+
+    private void NameChanged(string name)
+    {
+        // name changed, do something in here
+    }
+}

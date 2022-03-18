@@ -1,0 +1,21 @@
+﻿@inherits LayoutComponentBase
+
+<PageTitle>Experimental</PageTitle>
+
+<div class="page">
+    <div class="sidebar">
+        <NavMenu />
+    </div>
+
+    <main>
+        <div class="alert-danger">
+            This page is experimental!!!!!!
+            <button class="btn btn-primary" @onclick="Upvote">Thumb Up (@ThumbUp)</button>
+            <button class="btn btn-primary" @onclick="Downvote">Thumb Down (@ThumbDown)</button>
+        </div>
+
+        <article class="content px-4">
+            @Body
+        </article>
+    </main>
+</div>

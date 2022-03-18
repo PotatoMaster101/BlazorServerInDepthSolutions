@@ -1,0 +1,33 @@
+﻿@page "/counter"
+@page "/Demo/Counter/{Count:int?}"
+
+<PageTitle>Counter</PageTitle>
+
+<h1>Counter</h1>
+
+<p role="status">Current count: @_currentCount</p>
+
+<button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
+
+<ul>
+    <li><a href="/Demo/Counter">/Demo/Counter</a></li>
+    <li><a href="/Demo/Counter/999">/Demo/Counter/999</a></li>
+</ul>
+
+@code {
+    [Parameter]
+    public int? Count { get; set; }
+
+    private int _currentCount;
+
+    protected override void OnParametersSet()
+    {
+        base.OnParametersSet();
+        _currentCount = Count ?? 0;
+    }
+
+    private void IncrementCount()
+    {
+        _currentCount++;
+    }
+}

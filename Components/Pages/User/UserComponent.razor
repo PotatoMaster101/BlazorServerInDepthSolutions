@@ -1,0 +1,32 @@
+﻿@using Components.Data
+
+<div>
+    @UserDisplay.DisplayName
+    <button class="btn btn-primary" @onclick="ToggleNames">Fix</button>
+
+    @foreach (var name in UserDisplay.GetNameVariation())
+    {
+        <button class="btn btn-secondary" @onclick="() => SetNewDisplayName(name)" hidden="@_hideNames">@name</button>
+    }
+</div>
+
+@code {
+    private bool _hideNames = true;
+
+    [Parameter]
+    public User UserDisplay { get; set; } = new("Firstname", "Lastname");
+
+    [Parameter]
+    public EventCallback<string> OnNameClick { get; set; }
+
+    private void ToggleNames()
+    {
+        _hideNames = !_hideNames;
+    }
+
+    private void SetNewDisplayName(string name)
+    {
+        UserDisplay.DisplayName = name;
+        OnNameClick.InvokeAsync(name);
+    }
+}

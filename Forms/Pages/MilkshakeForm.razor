@@ -1,0 +1,52 @@
+﻿@page "/Milkshake"
+@using Forms.Model
+
+<h3>Milkshake Form</h3>
+<h4 class="text-success">@_result</h4>
+
+<EditForm Model="@_milkshake" OnSubmit="HandleValidSubmit">
+    <DataAnnotationsValidator/>
+    <ValidationSummary/>
+
+    <p>
+        Milkshake Size:
+        <InputSelect @bind-Value="_milkshake.Size">
+            @foreach (var size in Enum.GetValues<MilkshakeSize>())
+            {
+                <option>@size</option>
+            }
+        </InputSelect>
+    </p>
+    <p>
+        Milkshake Type:
+        <InputSelect @bind-Value="_milkshake.Type">
+            @foreach (var type in Enum.GetValues<MilkshakeType>())
+            {
+                <option>@type</option>
+            }
+        </InputSelect>
+    </p>
+    <p>
+        Milkshake Name:
+        <InputText id="name" @bind-Value="_milkshake.Name"/>
+    </p>
+    <p>
+        Count:
+        <InputNumber id="count" @bind-Value="_milkshake.Count"/>
+    </p>
+    <p>
+        Cream:
+        <InputCheckbox id="cream" @bind-Value="_milkshake.Cream"/>
+    </p>
+    <button class="btn btn-primary" type="submit">Submit</button>
+</EditForm>
+
+@code {
+    private readonly MilkshakeModel _milkshake = new();
+    private string _result = "No milkshake yet";
+
+    private void HandleValidSubmit()
+    {
+        _result = $"Size: {_milkshake.Size}, Type: {_milkshake.Type}, Name: {_milkshake.Name}, Count: {_milkshake.Count}, Cream: {_milkshake.Cream}";
+    }
+}
